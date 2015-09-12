@@ -3,21 +3,22 @@ package com.example.jarry.practice_mvp.view.fragment;
 import android.media.Image;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.jarry.practice_mvp.R;
 import com.example.jarry.practice_mvp.model.BookEntity;
 import com.example.jarry.practice_mvp.presenter.BookDetailsPresenter;
-import com.example.jarry.practice_mvp.view.LoadDataView;
+import com.example.jarry.practice_mvp.view.LoadBookView;
 
-public class BookDetailFragment extends Fragment implements LoadDataView{
+/***
+ *
+ */
+public class BookDetailFragment extends Fragment implements LoadBookView{
 
     public static final String ISBN = "9787121060748";
     private BookDetailsPresenter presenter;
@@ -83,6 +84,7 @@ public class BookDetailFragment extends Fragment implements LoadDataView{
         this.textViewAuthorIntro.setText(entity.getAuthor_intro());
         this.textViewCatalog.setText(entity.getCatalog());
     }
+
 
     @Override
     public void showLoading() {

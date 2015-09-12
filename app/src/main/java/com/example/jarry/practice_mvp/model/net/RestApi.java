@@ -8,11 +8,19 @@ import com.example.jarry.practice_mvp.model.BookEntity;
 public interface RestApi {
     String API_ISBN_BASE_URL = "https://api.douban.com/v2/book/isbn/";
 
+    /***
+     *
+     */
     interface BookDetailsCallback {
         void onBookEntityLoaded(BookEntity bookEntity);
         void onError(Exception e);
     }
 
+    /**
+     *
+     * @param isbn
+     * @param bookDetailsCallback
+     */
     void getBookDetailByIsbn(final String isbn, final BookDetailsCallback bookDetailsCallback);
 
 }

@@ -1,14 +1,11 @@
 package com.example.jarry.practice_mvp.presenter;
 
-
 import android.content.Context;
 import android.os.Looper;
-import android.util.Log;
-
 import com.example.jarry.practice_mvp.model.BookEntity;
 import com.example.jarry.practice_mvp.model.net.RestApi;
 import com.example.jarry.practice_mvp.model.net.RestApiImpl;
-import com.example.jarry.practice_mvp.view.LoadDataView;
+import com.example.jarry.practice_mvp.view.LoadBookView;
 
 import android.os.Handler;
 
@@ -17,7 +14,7 @@ import android.os.Handler;
  */
 public class BookDetailsPresenter {
     private RestApi restApi = null;
-    private LoadDataView loadDataView;
+    private LoadBookView loadBookView;
     private String isbn;
 
     public BookDetailsPresenter(Context context, String isbn) {
@@ -25,11 +22,11 @@ public class BookDetailsPresenter {
         this.isbn =isbn;
     }
 
-    public void setView(LoadDataView loadDataView) {
-        this.loadDataView = loadDataView;
+    public void setView(LoadBookView loadBookView) {
+        this.loadBookView = loadBookView;
     }
     public void loadData() {
-        loadDataView.showLoading();
+        loadBookView.showLoading();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -39,12 +36,11 @@ public class BookDetailsPresenter {
         thread.start();
     }
 
-
     private RestApi.BookDetailsCallback bookDetailsCallback = new RestApi.BookDetailsCallback() {
         @Override
         public void onBookEntityLoaded(BookEntity bookEntity) {
             notifyDataLoadedSuccessful(bookEntity);
-            BookDetailsPresenter.this.loadDataView.hideLoading();
+            BookDetailsPresenter.this.loadBookView.hideLoading();
         }
 
         @Override
@@ -58,7 +54,7 @@ public class BookDetailsPresenter {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                BookDetailsPresenter.this.loadDataView.showDetailsView(bookEntity);
+                BookDetailsPresenter.this.loadBookView.showDetailsView(bookEntity);
             }
         });
     }
